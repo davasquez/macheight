@@ -24,4 +24,19 @@ For debugging purpose, print also the height of each player:
 Brevin Knight(70) - Nate Robinson(69)
 Mike Wilks(70) - Nate Robinson(69)
 ```
-``
+
+**Run Unit Test**
+
+```bash
+(env) (base) [dvasquez@dmac machEight]$ python -m unittest test_app -v
+test_edge_cases (test_app.TestApp) ... ok
+test_get_players (test_app.TestApp) ... ok
+test_name (test_app.TestApp) ... ok
+test_no_matches_found (test_app.TestApp) ... ok
+test_pairs (test_app.TestApp) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.189s
+
+OK
+```

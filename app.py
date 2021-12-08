@@ -81,13 +81,13 @@ def get_players_group_by_height(players):
 
     return players_group_by_height
 
-def print_players_pairs(total_height, players, players_group_by_height, names):
-    """Print a list of all pairs of players whose height adds up to total_height
+def get_players_pairs(total_height, players, players_group_by_height, names):
+    """Return a list of all pairs of players whose height adds up to total_height
 
-    Keyword arguments:
-    total_height -- integer value
-
-    Complexity: O(n)
+    Complexity:
+    Each block of code has a complexity of n. If we join the complexity of all
+    blocks, it would lead to n + n + n + ... = kn, with k << n. Therefore,
+    k can be left out, leading to a complexity of O(n).
     """
 
     # The following block has a complexity of O(n) where n is the number of
@@ -121,16 +121,15 @@ def print_players_pairs(total_height, players, players_group_by_height, names):
         if '-' + p1 != p:
             players_pairs += names[p1] + ' - ' + names[p[1:]] + '\n'
 
-    if players_pairs == '':
-        print('No matches found')
-    else:
-        print(players_pairs)
+    return players_pairs
 
-def main(total_height, print_height):
-    """Print a list of all pairs of players whose height adds up to total_height
+def get_pairs(players, total_height, print_height):
+    """Return a list of all pairs of players whose height adds up to total_height
 
     Keyword arguments:
+    players -- list of players
     total_height -- integer value
+    print_height -- boolean to print height of each player for debugging purpose
 
     Edge cases considered:
     - Avoid duplicated pairs of players.
@@ -142,8 +141,6 @@ def main(total_height, print_height):
     k can be left out, leading to a complexity of O(n).
     """
 
-    players = get_players()
-
     # complexity O(n)
     names = get_players_names(players, print_height)
 
@@ -151,7 +148,19 @@ def main(total_height, print_height):
     players_group_by_height = get_players_group_by_height(players)
 
     # complexity O(n)
-    print_players_pairs(total_height, players, players_group_by_height, names)
+    return get_players_pairs(total_height, players, players_group_by_height, names)
+
+def main(total_height, print_height):
+    """App entry point."""
+
+    players = get_players()
+
+    players_pairs = get_pairs(players, total_height, print_height)
+
+    if players_pairs == '':
+        print('No matches found')
+    else:
+        print(players_pairs)
 
 if __name__ == '__main__':
     """Command line call."""
