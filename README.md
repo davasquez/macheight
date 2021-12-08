@@ -1,5 +1,6 @@
+# Mach Eight App
 
-**Install**
+## Install
 
 In order not to mess up your local environment, install the package in an isolated virtual environment:
 
@@ -9,7 +10,7 @@ In order not to mess up your local environment, install the package in an isolat
 (env) (base) [dvasquez@dmac machEight]$ pip3 install -r requirements.txt
 ```
 
-**Run**
+## Run
 
 ```bash
 (env) (base) [dvasquez@dmac machEight]$ python app.py 139
@@ -25,7 +26,7 @@ Brevin Knight(70) - Nate Robinson(69)
 Mike Wilks(70) - Nate Robinson(69)
 ```
 
-**Run Unit Test**
+## Run Unit Test
 
 ```bash
 (env) (base) [dvasquez@dmac machEight]$ python -m unittest test_app -v
