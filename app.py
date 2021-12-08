@@ -2,20 +2,23 @@ import sys
 import requests
 import argparse
 
-def get_total_height():
-    """Parse and validate the integer input to the program and return it."""
+def parse_args():
+    """Parse and validate the input args."""
 
     parser = argparse.ArgumentParser(description='Macheight Test')
 
-    parser.add_argument('height', type=int,
+    parser.add_argument('total_height', type=int,
                         help='Total height in inches adds up')
+
+    parser.add_argument('--print_height', action='store_true',
+                        help='Print height of each player')
 
     args = parser.parse_args()
 
-    if args.height < 0:
-        parser.error('height must be greater than zero')
+    if args.total_height <= 0:
+        parser.error('total_height must be greater than zero')
 
-    return args.height
+    return args
 
 def get_players():
     """Get all players from the repo and return them in a list.
@@ -36,12 +39,13 @@ def get_players():
 
     return players['values']
 
-def get_name(p):
+def get_name(p, print_height):
     """Return the player name together with the height for debugging purpose."""
 
-    return p['first_name'] + ' ' + p['last_name'] + '(' + p['h_in'] + ')'
+    return (p['first_name'] + ' ' + p['last_name'] +
+            ('(' + p['h_in'] + ')' if print_height else ''))
 
-def get_players_names(players):
+def get_players_names(players, print_height):
     """Return a dictionary which maps indexes with players names.
 
     Complexity: O(n)
@@ -50,7 +54,7 @@ def get_players_names(players):
     names = {}
     idx = 0
     for p in players:
-        names[str(idx)] = get_name(p)
+        names[str(idx)] = get_name(p, print_height)
         idx += 1
 
     return names
@@ -122,7 +126,7 @@ def print_players_pairs(total_height, players, players_group_by_height, names):
     else:
         print(players_pairs)
 
-def main(total_height):
+def main(total_height, print_height):
     """Print a list of all pairs of players whose height adds up to total_height
 
     Keyword arguments:
@@ -141,7 +145,7 @@ def main(total_height):
     players = get_players()
 
     # complexity O(n)
-    names = get_players_names(players)
+    names = get_players_names(players, print_height)
 
     # complexity O(n)
     players_group_by_height = get_players_group_by_height(players)
@@ -152,5 +156,5 @@ def main(total_height):
 if __name__ == '__main__':
     """Command line call."""
 
-    total_height = get_total_height()
-    main(total_height)
+    args = parse_args()
+    main(args.total_height, args.print_height)
