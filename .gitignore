@@ -1,0 +1,18 @@
+# ignore local environment variables
+.env
+
+# ignore the local virtual environment
+env
+
+# ignore pyc files
+__pycache__
+*.pyc*
+
+# ignore swp files
+*.sw*
+
+# DS_STORE files generated in iOS
+.DS_STORE
+
+# ignore vscode files
+.vscode
